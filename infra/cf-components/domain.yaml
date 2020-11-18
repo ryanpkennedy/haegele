@@ -1,0 +1,47 @@
+Description: >
+    This template creates a hosted zone in which recordsets can be added.
+
+Parameters:
+
+    DomainName:
+        Description: The primary domain name of the site.
+        Type: String
+ 
+    DomainPrefix:
+        Description: The prefix of the public URL that will point into the ALB.
+        Type: String
+
+    LoadBalancerDNS:
+        Description: The public DNS of the ALB.
+        Type: String
+        
+    LoadBalancerHostedZone:
+        Description: The public DNS of the ALB.
+        Type: String
+
+Resources: 
+    Route53HostedZone:
+        Type: AWS::Route53::HostedZone
+        Properties:
+            Name: !Sub ${DomainName}
+
+    DNSRecord1:
+        Type: AWS::Route53::RecordSet
+        Properties:
+            HostedZoneName: !Sub ${DomainName}.
+            Name: !Sub ${DomainPrefix}.${DomainName}
+            Type: A
+            AliasTarget:
+                HostedZoneId: !Ref LoadBalancerHostedZone
+                DNSName: !Ref LoadBalancerDNS
+        DependsOn: Route53HostedZone
+
+
+Outputs: 
+    PrimaryURL:
+        Description: Main URL where the application can be found.
+        Value: !Sub ${DomainPrefix}.${DomainName}
+
+    NameServers:
+        Description: A list of nameservers.
+        Value: !Join [',',!GetAtt Route53HostedZone.NameServers]

@@ -1,0 +1,27 @@
+[
+    {
+      "ParameterKey": "GitHubOAuthToken",
+      "ParameterValue": "REPLACE ME"
+    }, 
+    {
+      "ParameterKey": "GitHubOwner",
+      "ParameterValue": "gerarddj"
+    },
+    {
+      "ParameterKey": "GitHubRepo",
+      "ParameterValue": "hg"
+    },
+    {
+      "ParameterKey": "GitHubBranch",
+      "ParameterValue": "main"
+    },
+    {
+      "ParameterKey": "ApplicationStackName",
+      "ParameterValue": "hg-application"
+    },
+    {
+      "ParameterKey": "DomainName",
+      "ParameterValue": "haegelegame.com"
+    }
+]
+ 
